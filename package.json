@@ -1,14 +1,12 @@
 {
-  "name": "max-hoang-wordpress",
+  "name": "max-hoang-frontend",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "wp:dev": "wp-now start --path ./wordpress/wp-content --port 8881 --skip-browser --blueprint ./wordpress/blueprint.json",
-    "wp:reset": "wp-now start --path ./wordpress/wp-content --port 8881 --skip-browser --blueprint ./wordpress/blueprint.json --reset"
+    "lint": "next lint"
   },
   "dependencies": {
     "next": "^15.3.8",
@@ -19,7 +17,6 @@
     "@types/node": "22.15.3",
     "@types/react": "19.1.2",
     "@types/react-dom": "19.1.2",
-    "@wp-now/wp-now": "0.1.74",
     "eslint": "9.24.0",
     "eslint-config-next": "^15.3.8",
     "typescript": "5.8.3"

@@ -83,10 +83,10 @@ export default async function HomePage() {
               ))
             ) : (
               <article className="entry-card entry-card--empty">
-                <p className="entry-card__meta">WordPress posts</p>
+                <p className="entry-card__meta">Notion posts</p>
                 <h3>No posts published yet.</h3>
                 <p>
-                  Publish your first article in WordPress and it will appear here.
+                  Add your first published article in Notion and it will appear here.
                 </p>
               </article>
             )}
@@ -125,10 +125,10 @@ export default async function HomePage() {
               ))
             ) : (
               <article className="project-card project-card--empty">
-                <p className="project-card__status">WordPress projects</p>
+                <p className="project-card__status">Notion projects</p>
                 <h3>No projects published yet.</h3>
                 <p>
-                  Add your first project in WordPress and it will appear here.
+                  Add your first visible project in Notion and it will appear here.
                 </p>
               </article>
             )}

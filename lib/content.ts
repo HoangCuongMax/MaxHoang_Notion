@@ -1,8 +1,14 @@
 import { Post, Project } from "@/lib/types";
-import { fetchWordPressPosts, fetchWordPressProjects } from "@/lib/wordpress";
+import { fallbackPosts, fallbackProjects } from "@/lib/mock-data";
+import {
+  fetchNotionPosts,
+  fetchNotionProjects,
+  hasNotionConfig
+} from "@/lib/notion";
 
 export async function getPosts(): Promise<Post[]> {
-  return fetchWordPressPosts();
+  const posts = await fetchNotionPosts();
+  return posts.length > 0 || hasNotionConfig("blog") ? posts : fallbackPosts;
 }
 
 export async function getPostBySlug(slug: string): Promise<Post | undefined> {
@@ -16,7 +22,10 @@ export async function getFeaturedPosts(): Promise<Post[]> {
 }
 
 export async function getProjects(): Promise<Project[]> {
-  return fetchWordPressProjects();
+  const projects = await fetchNotionProjects();
+  return projects.length > 0 || hasNotionConfig("projects")
+    ? projects
+    : fallbackProjects;
 }
 
 export async function getProjectBySlug(

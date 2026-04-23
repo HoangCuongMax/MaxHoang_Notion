@@ -64,11 +64,11 @@ export default async function ProjectsPage() {
         ) : (
           <article className="project-row">
             <div className="project-row__header">
-              <p className="project-card__status">WordPress projects</p>
+              <p className="project-card__status">Notion projects</p>
               <h2>No projects published yet.</h2>
             </div>
             <p>
-              Create a project in WordPress admin and it will appear in this section.
+              Create a visible project in Notion and it will appear in this section.
             </p>
           </article>
         )}

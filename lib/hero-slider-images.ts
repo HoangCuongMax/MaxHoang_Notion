@@ -1,13 +1,13 @@
 export const heroSliderImages = [
-  "http://127.0.0.1:8881/wp-content/uploads/Slider_Photo/assets-b646c680cb1245e8b61dacef2f73503f-02d010dfdc1a45feace9f9dea6588ae7.webp",
-  "http://127.0.0.1:8881/wp-content/uploads/Slider_Photo/assets-b646c680cb1245e8b61dacef2f73503f-043efaae18c844c4807d24cbc5918080.webp",
-  "http://127.0.0.1:8881/wp-content/uploads/Slider_Photo/assets-b646c680cb1245e8b61dacef2f73503f-4a7186eb92b349b0ad9468d44b21d719.webp",
-  "http://127.0.0.1:8881/wp-content/uploads/Slider_Photo/assets-b646c680cb1245e8b61dacef2f73503f-6cd5e091233448d3ab5388c2d048a726.webp",
-  "http://127.0.0.1:8881/wp-content/uploads/Slider_Photo/assets-b646c680cb1245e8b61dacef2f73503f-99107ffeb7ba4d60867cfebdcdfec8fc.webp",
-  "http://127.0.0.1:8881/wp-content/uploads/Slider_Photo/assets-b646c680cb1245e8b61dacef2f73503f-ac635501401445e0a55d7578a5757e56.webp",
-  "http://127.0.0.1:8881/wp-content/uploads/Slider_Photo/assets-b646c680cb1245e8b61dacef2f73503f-b46f58f3884c401c996d4d0fec397a00.webp",
-  "http://127.0.0.1:8881/wp-content/uploads/Slider_Photo/assets-b646c680cb1245e8b61dacef2f73503f-b9c8719931b244fca8e8945056cabcf0.webp",
-  "http://127.0.0.1:8881/wp-content/uploads/Slider_Photo/assets-b646c680cb1245e8b61dacef2f73503f-c7ef0918c2c14197a631b96be941550f.webp",
-  "http://127.0.0.1:8881/wp-content/uploads/Slider_Photo/assets-b646c680cb1245e8b61dacef2f73503f-d47f99eee28b40cea5e616fc0deb4fc2.webp",
-  "http://127.0.0.1:8881/wp-content/uploads/Slider_Photo/assets-b646c680cb1245e8b61dacef2f73503f-fbb6c9b75c434277a255692cf13c866b.webp"
+  "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=80",
+  "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80",
+  "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=900&q=80",
+  "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80",
+  "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80",
+  "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=80",
+  "https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=900&q=80",
+  "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&w=900&q=80",
+  "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80",
+  "https://images.unsplash.com/photo-1518005020951-eccb494ad742?auto=format&fit=crop&w=900&q=80",
+  "https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=900&q=80"
 ];

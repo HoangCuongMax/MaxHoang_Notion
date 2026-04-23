@@ -7,33 +7,17 @@ const links = [
   { href: "/projects", label: "Projects" }
 ];
 
-function getWordPressAdminUrl() {
-  if (process.env.WORDPRESS_ADMIN_URL) {
-    return process.env.WORDPRESS_ADMIN_URL;
-  }
-
-  const apiUrl = process.env.WORDPRESS_API_URL;
-
-  if (!apiUrl) {
-    return "/wp-admin";
-  }
-
-  return apiUrl.replace(/\/wp-json\/wp\/v2\/?$/, "/wp-admin");
-}
-
 export function SiteHeader() {
-  const adminUrl = getWordPressAdminUrl();
-
   return (
     <header className="site-header">
       <div className="site-header__inner">
         <Link href="/" className="brand-lockup" aria-label="Max Hoang home">
           <span className="brand-lockup__avatar" aria-hidden="true">
-            <img src="/max-hoang-logo.jpg" alt="" />
+            MH
           </span>
           <span className="brand-lockup__content">
             <span className="brand-lockup__name">Max Hoang</span>
-            <span className="brand-lockup__tag">Headless WordPress portfolio</span>
+            <span className="brand-lockup__tag">Notion-powered portfolio</span>
           </span>
         </Link>
 
@@ -51,14 +35,6 @@ export function SiteHeader() {
           >
             <span className="button__badge">in</span>
             <span>Connect on LinkedIn</span>
-          </a>
-          <a
-            href={adminUrl}
-            className="button button--nav"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Login
           </a>
         </nav>
       </div>

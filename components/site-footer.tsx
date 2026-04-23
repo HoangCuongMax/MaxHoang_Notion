@@ -9,8 +9,8 @@ export function SiteFooter() {
           </span>
         </div>
         <p>
-          WordPress handles publishing. The frontend handles presentation,
-          performance, and how your work is experienced.
+          Notion handles structured content. The frontend handles presentation,
+          performance, and how the work is experienced.
         </p>
       </div>
     </footer>

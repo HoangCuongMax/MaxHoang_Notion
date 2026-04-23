@@ -4,7 +4,7 @@ const designTalkingPoints = [
   {
     title: "I don’t use generic themes, your site will be fully tailored to your business.",
     body:
-      "Most WordPress designers rely on premade templates. I build custom solutions with modern methods so your site does not feel like another copy in the market."
+      "Most template-based sites feel interchangeable. I build custom solutions with modern methods so your site does not feel like another copy in the market."
   },
   {
     title: "You will be able to update everything yourself, no technical knowledge needed.",
@@ -19,7 +19,7 @@ const designTalkingPoints = [
   {
     title: "I separate design from content, so your site is easier to scale.",
     body:
-      "WordPress handles content while the frontend handles presentation. That means you can redesign later without rebuilding your entire content library."
+      "Notion handles structured content while the frontend handles presentation. That means you can redesign later without rebuilding your entire content library."
   },
   {
     title: "I’ll show you how to manage your content in less than 10 minutes.",
@@ -50,9 +50,9 @@ const designTalkingPoints = [
 
 const supportingServices = [
   {
-    name: "Headless WordPress builds",
+    name: "Notion-backed content platforms",
     summary:
-      "Custom frontends connected to WordPress so content stays easy to manage while the design stays fast and distinctive."
+      "Custom frontends connected to Notion so content stays easy to manage while the design stays fast and distinctive."
   },
   {
     name: "AI-powered website features",
@@ -78,7 +78,7 @@ export default function ServicesPage() {
         <h1>Custom websites and digital systems built to be clear, fast, and useful.</h1>
         <p className="page-intro__lede">
           I design and build custom websites, content platforms, and AI-enabled
-          experiences with WordPress as a practical backend and a custom frontend
+          experiences with Notion as a practical backend and a custom frontend
           for performance, flexibility, and stronger presentation.
         </p>
 

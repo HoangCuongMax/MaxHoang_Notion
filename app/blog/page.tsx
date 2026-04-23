@@ -16,7 +16,7 @@ export default async function BlogIndexPage() {
         <p className="eyebrow">Blog</p>
         <h1>Writing on product, systems, and the work behind the work.</h1>
         <p className="page-intro__lede">
-          Posts are intended to be published from WordPress and rendered here in
+          Posts are intended to be published from Notion and rendered here in
           a custom reading experience.
         </p>
 
@@ -57,10 +57,10 @@ export default async function BlogIndexPage() {
         ) : (
           <article className="archive-item">
             <div>
-              <p className="archive-item__meta">WordPress posts</p>
+              <p className="archive-item__meta">Notion posts</p>
               <h2>No posts published yet.</h2>
               <p>
-                Create a post in WordPress admin and it will appear in this archive.
+                Create a published post in Notion and it will appear in this archive.
               </p>
             </div>
           </article>

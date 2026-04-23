@@ -11,9 +11,9 @@ export const fallbackPosts: Post[] = [
     featured: true,
     contentHtml: `
       <p>A personal website should not feel like two unrelated products stitched together. The blog, the case studies, and the future experiments all need a shared surface.</p>
-      <p>That is why this project uses <strong>WordPress as a publishing system</strong> and a separate frontend as the experience layer. Content stays easy to manage while presentation stays flexible.</p>
-      <h2>Why headless is the right fit</h2>
-      <p>WordPress already solves the editorial workflow: drafts, publishing, media, revisions, and a familiar admin. A custom frontend solves the opposite problem: brand, speed, structure, and control.</p>
+      <p>That is why this project uses <strong>Notion as a structured publishing system</strong> and a separate frontend as the experience layer. Content stays easy to manage while presentation stays flexible.</p>
+      <h2>Why a structured backend is the right fit</h2>
+      <p>Notion keeps the editorial workflow close to the planning work: drafts, publishing fields, lightweight review, and database views. A custom frontend solves the opposite problem: brand, speed, structure, and control.</p>
       <blockquote>The CMS should be comfortable. The frontend should be unmistakable.</blockquote>
       <p>That split becomes even more useful when the site needs to carry both essays and product work.</p>
     `
@@ -49,16 +49,16 @@ export const fallbackProjects: Project[] = [
     slug: "max-hoang-personal-platform",
     title: "Max Hoang Personal Platform",
     summary:
-      "A headless WordPress website with a custom Next.js frontend for essays, project case studies, and future product expansion.",
+      "A Notion-backed website with a custom Next.js frontend for essays, project case studies, and future product expansion.",
     status: "In progress",
-    tags: ["Next.js", "WordPress API", "TypeScript"],
+    tags: ["Next.js", "Notion API", "TypeScript"],
     featured: true,
     contentHtml: `
-      <p>This project creates a deliberate home for writing and project documentation. WordPress handles editorial content, while Next.js handles rendering, routing, and visual direction.</p>
+      <p>This project creates a deliberate home for writing and project documentation. Notion handles structured content, while Next.js handles rendering, routing, and visual direction.</p>
       <h2>Scope</h2>
       <p>The first version focuses on three areas: homepage, blog, and projects. The structure leaves room for future additions such as newsletters, talks, or experiments.</p>
       <h2>Implementation notes</h2>
-      <p>The data layer is built to work with WordPress when configured, but it also includes local fallback content so the frontend can be developed independently.</p>
+      <p>The data layer is built to work with Notion data sources when configured, but it also includes local fallback content so the frontend can be developed independently.</p>
     `
   },
   {
@@ -77,11 +77,11 @@ export const fallbackProjects: Project[] = [
     slug: "writing-workflow",
     title: "Writing Workflow",
     summary:
-      "An editorial pipeline for outlining, drafting, publishing, and surfacing articles from WordPress into the custom site.",
+      "An editorial pipeline for outlining, drafting, publishing, and surfacing articles from Notion into the custom site.",
     status: "Active",
-    tags: ["WordPress", "Editorial", "Publishing"],
+    tags: ["Notion", "Editorial", "Publishing"],
     contentHtml: `
-      <p>The writing workflow depends on using WordPress for what it is good at: authorship, review, and scheduling. The frontend simply consumes the content once it is ready.</p>
+      <p>The writing workflow depends on using Notion for what it is good at: planning, structured fields, and lightweight collaboration. The frontend simply consumes the content once it is ready.</p>
     `
   }
 ];
