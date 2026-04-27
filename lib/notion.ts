@@ -1,11 +1,11 @@
-import { MediaAsset, Post, Project } from "@/lib/types";
+import { Award, MediaAsset, Post, Project } from "@/lib/types";
 
 const NOTION_API_BASE = "https://api.notion.com/v1";
 const DEFAULT_NOTION_VERSION = "2026-03-11";
 const DEFAULT_REVALIDATE_SECONDS = 300;
 const DEFAULT_IMAGEKIT_URL_ENDPOINT = "https://ik.imagekit.io/maxhoang";
 
-type ContentSource = "blog" | "projects";
+type ContentSource = "blog" | "projects" | "awards";
 
 type NotionRichText = {
   plain_text?: string;
@@ -120,6 +120,19 @@ function getDataSourceConfig(source: ContentSource): DataSourceConfig {
       databaseId: readEnv([
         "NOTION_BLOG_DATABASE_ID",
         "NOTION_POSTS_DATABASE_ID"
+      ])
+    };
+  }
+
+  if (source === "awards") {
+    return {
+      dataSourceId: readEnv([
+        "NOTION_AWARDS_DATA_SOURCE_ID",
+        "NOTION_AWARD_DATA_SOURCE_ID"
+      ]),
+      databaseId: readEnv([
+        "NOTION_AWARDS_DATABASE_ID",
+        "NOTION_AWARD_DATABASE_ID"
       ])
     };
   }
@@ -640,6 +653,29 @@ function propertyDate(property: NotionProperty | undefined) {
   return undefined;
 }
 
+function propertyNumber(property: NotionProperty | undefined) {
+  if (!property?.type) {
+    return undefined;
+  }
+
+  if (property.type === "number" && typeof property.number === "number") {
+    return property.number;
+  }
+
+  if (property.type === "formula") {
+    const formula = asObject(property.formula);
+
+    if (typeof formula?.number === "number") {
+      return formula.number;
+    }
+  }
+
+  const text = propertyText(property);
+  const value = text ? Number(text) : Number.NaN;
+
+  return Number.isFinite(value) ? value : undefined;
+}
+
 function propertyCheckbox(property: NotionProperty | undefined) {
   return property?.type === "checkbox" && typeof property.checkbox === "boolean"
     ? property.checkbox
@@ -888,6 +924,76 @@ async function mapProject(page: NotionPage): Promise<Sortable<Project>> {
   };
 }
 
+function getReferenceUrl(page: NotionPage) {
+  const url = propertyText(
+    getPropertyByName(page.properties, [
+      "Reference URL",
+      "Link",
+      "Project URL",
+      "URL"
+    ])
+  );
+
+  return url && isSafeUrl(url) ? url : undefined;
+}
+
+function mapAward(page: NotionPage): Award & {
+  sortOrder: number;
+  featuredRank: number;
+} {
+  const title = getTitle(page);
+  const year =
+    propertyNumber(getPropertyByName(page.properties, ["Year"])) ??
+    new Date(getDateValue(page)).getFullYear();
+  const featured = propertyCheckbox(
+    getPropertyByName(page.properties, ["Featured", "Homepage", "Pinned"])
+  );
+
+  return {
+    slug: getSlug(page, title),
+    title,
+    event:
+      propertyText(getPropertyByName(page.properties, ["Event", "Program"])) ??
+      "",
+    project: propertyText(
+      getPropertyByName(page.properties, ["Project", "Work", "Project Name"])
+    ),
+    result:
+      propertyText(
+        getPropertyByName(page.properties, [
+          "Result",
+          "Award",
+          "Recognition",
+          "Prize"
+        ])
+      ) ?? "",
+    summary:
+      propertyText(
+        getPropertyByName(page.properties, [
+          "Summary",
+          "Description",
+          "Excerpt"
+        ])
+      ) ?? "",
+    year,
+    tags: propertyTags(
+      getPropertyByName(page.properties, [
+        "Tags",
+        "Categories",
+        "Category"
+      ])
+    ),
+    coverImage: getCoverImage(page, title),
+    referenceUrl: getReferenceUrl(page),
+    featured,
+    sortOrder:
+      propertyNumber(
+        getPropertyByName(page.properties, ["Sort Order", "Order", "Rank"])
+      ) ?? 999,
+    featuredRank: featured ? 0 : 1
+  };
+}
+
 function sortByNewest<T extends { sortDate: string }>(items: T[]) {
   return [...items].sort(
     (first, second) =>
@@ -913,4 +1019,23 @@ export async function fetchNotionProjects(): Promise<Project[]> {
   const pages = await queryDataSource("projects", 50);
   const projects = await Promise.all(pages.filter(isVisiblePage).map(mapProject));
   return sortByNewest(projects).map(stripSortDate);
+}
+
+export async function fetchNotionAwards(): Promise<Award[]> {
+  const pages = await queryDataSource("awards", 50);
+  const awards = pages.filter(isVisiblePage).map(mapAward);
+
+  return awards
+    .sort(
+      (first, second) =>
+        first.featuredRank - second.featuredRank ||
+        first.sortOrder - second.sortOrder ||
+        second.year - first.year ||
+        first.title.localeCompare(second.title)
+    )
+    .map(({ sortOrder, featuredRank, ...award }) => {
+      void sortOrder;
+      void featuredRank;
+      return award;
+    });
 }

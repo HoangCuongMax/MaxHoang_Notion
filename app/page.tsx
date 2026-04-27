@@ -1,12 +1,14 @@
+import { AwardsCarousel } from "@/components/awards-carousel";
 import Link from "next/link";
 import { MediaCover, MediaImage } from "@/components/media";
-import { getFeaturedPosts, getFeaturedProjects } from "@/lib/content";
+import { getAwards, getFeaturedPosts, getFeaturedProjects } from "@/lib/content";
 import { heroSliderImages } from "@/lib/hero-slider-images";
 
 export default async function HomePage() {
-  const [posts, projects] = await Promise.all([
+  const [posts, projects, awards] = await Promise.all([
     getFeaturedPosts(),
-    getFeaturedProjects()
+    getFeaturedProjects(),
+    getAwards()
   ]);
   const midpoint = Math.ceil(heroSliderImages.length / 2);
   const firstRow = heroSliderImages.slice(0, midpoint);
@@ -63,6 +65,67 @@ export default async function HomePage() {
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="section section--contrast">
+        <div className="container about-intro">
+          <div className="about-intro__copy">
+            <p className="eyebrow">About me</p>
+            <h2>Building AI products with a designer&apos;s eye and a storyteller&apos;s frame.</h2>
+            <p className="about-intro__lede">
+              I&apos;m Max Hoang, an AI enthusiast, web developer, and storyteller
+              from Vietnam, now based in the Northern Territory of Australia.
+            </p>
+            <p>
+              My work sits across AI, web, and app development, shaped by an
+              earlier background in design and marketing and grounded in tools
+              for education, business, and local communities.
+            </p>
+            <p>
+              Recent projects span translation tools, AI-integrated mapping,
+              digital sustainability products, and startup-ready product
+              experiments built to solve practical problems.
+            </p>
+            <dl className="about-intro__facts">
+              <div>
+                <dt>Base</dt>
+                <dd>Darwin, Northern Territory</dd>
+              </div>
+              <div>
+                <dt>Focus</dt>
+                <dd>AI, web, and app development</dd>
+              </div>
+              <div>
+                <dt>Current track</dt>
+                <dd>Master of IT (Artificial Intelligence) at CDU</dd>
+              </div>
+            </dl>
+          </div>
+
+          <div className="about-intro__media">
+            <div className="video-frame">
+              <iframe
+                src="https://www.youtube-nocookie.com/embed/VTkfPKeZHYg"
+                title="Max Hoang introduction video"
+                loading="lazy"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section">
+        <div className="container awards-section">
+          <div className="section-heading">
+            <div>
+              <p className="eyebrow">Awards & recognition</p>
+              <h2>Hackathons, code fairs, and public-sector innovation work.</h2>
+            </div>
+          </div>
+          <AwardsCarousel items={awards} />
         </div>
       </section>
 

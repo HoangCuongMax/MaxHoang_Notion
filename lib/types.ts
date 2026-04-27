@@ -21,6 +21,20 @@ export type RelatedContentItem = {
   coverImage?: MediaAsset;
 };
 
+export type Award = {
+  slug: string;
+  title: string;
+  event: string;
+  project?: string;
+  result: string;
+  summary: string;
+  year: number;
+  tags: string[];
+  coverImage?: MediaAsset;
+  referenceUrl?: string;
+  featured?: boolean;
+};
+
 export type Post = {
   slug: string;
   title: string;

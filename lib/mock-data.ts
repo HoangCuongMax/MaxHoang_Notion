@@ -1,4 +1,4 @@
-import { Post, Project } from "@/lib/types";
+import { Award, Post, Project } from "@/lib/types";
 
 export const fallbackPosts: Post[] = [
   {
@@ -98,5 +98,56 @@ export const fallbackProjects: Project[] = [
     contentHtml: `
       <p>The writing workflow depends on using Notion for what it is good at: planning, structured fields, and lightweight collaboration. The frontend simply consumes the content once it is ready.</p>
     `
+  }
+];
+
+export const fallbackAwards: Award[] = [
+  {
+    slug: "rimpa-global-hackathon-winner",
+    title: "RIMPA Global Hackathon Winner",
+    event: "RIMPA Global Hackathon 2025",
+    project: "GreenLedger AI",
+    result: "$10,000 prize winner",
+    summary:
+      "Built GreenLedger AI, a carbon reporting and reduction platform for data and records teams, turning sustainability compliance into a practical workflow.",
+    year: 2025,
+    tags: ["AI", "Hackathon", "Award", "Innovation"],
+    featured: true
+  },
+  {
+    slug: "northern-territory-digital-excellence-award",
+    title: "Northern Territory Digital Excellence Award",
+    event: "Northern Territory Digital Excellence Awards 2025",
+    project: "CDU IT Code Fair project work",
+    result: "Recognised by Joshua Burgoyne MLA",
+    summary:
+      "Recognition for applied AI and product work in the Northern Territory digital community after a strong year of prototype and project delivery.",
+    year: 2025,
+    tags: ["AI", "Award", "Government", "Innovation"],
+    featured: true
+  },
+  {
+    slug: "cdu-it-code-fair-winner",
+    title: "CDU IT Code Fair Winner",
+    event: "CDU IT Code Fair 2025",
+    project: "NT Shift Surge",
+    result: "Winning team presentation",
+    summary:
+      "Presented NT Shift Surge, a concept designed to reduce staffing disruption during the Northern Territory wet season and improve workforce planning.",
+    year: 2025,
+    tags: ["Award", "Education", "Innovation"],
+    featured: true
+  },
+  {
+    slug: "govhack-nt-builder",
+    title: "GovHack NT Builder",
+    event: "GovHack NT 2025",
+    project: "CivicMate and government-service AI ideas",
+    result: "Open-data hackathon project delivery",
+    summary:
+      "Developed AI-assisted concepts focused on helping Australians navigate government services and public-sector information during the GovHack weekend.",
+    year: 2025,
+    tags: ["AI", "Hackathon", "Government", "Innovation"],
+    featured: true
   }
 ];

@@ -1,7 +1,8 @@
 import { addHeadingAnchors } from "@/lib/article";
-import { Post, Project, RelatedContentItem } from "@/lib/types";
-import { fallbackPosts, fallbackProjects } from "@/lib/mock-data";
+import { Award, Post, Project, RelatedContentItem } from "@/lib/types";
+import { fallbackAwards, fallbackPosts, fallbackProjects } from "@/lib/mock-data";
 import {
+  fetchNotionAwards,
   fetchNotionPosts,
   fetchNotionProjects,
   hasNotionConfig
@@ -143,6 +144,14 @@ export async function getFeaturedProjects(): Promise<Project[]> {
     0,
     3
   );
+}
+
+export async function getAwards(): Promise<Award[]> {
+  const awards = await fetchNotionAwards();
+
+  return awards.length > 0 || hasNotionConfig("awards")
+    ? awards
+    : fallbackAwards;
 }
 
 export async function getRelatedPosts(

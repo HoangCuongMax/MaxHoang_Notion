@@ -1,6 +1,6 @@
 # Max Hoang Frontend
 
-Custom personal website built with Next.js and Notion-backed content for blog posts and projects.
+Custom personal website built with Next.js and Notion-backed content for blog posts, projects, and awards.
 
 ## What is included
 
@@ -9,7 +9,7 @@ Custom personal website built with Next.js and Notion-backed content for blog po
 - blog index and blog detail pages
 - projects index and project detail pages
 - tools section with interactive utilities
-- Notion API integration for blog posts and projects
+- Notion API integration for blog posts, projects, and awards
 
 ## Stack
 
@@ -38,6 +38,7 @@ cp .env.example .env.local
 NOTION_API_KEY=secret_your_notion_integration_token
 NOTION_BLOG_DATA_SOURCE_ID=your_blog_data_source_id
 NOTION_PROJECTS_DATA_SOURCE_ID=your_projects_data_source_id
+NOTION_AWARDS_DATA_SOURCE_ID=your_awards_data_source_id
 NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT=https://ik.imagekit.io/your_imagekit_id
 ```
 
@@ -45,8 +46,9 @@ Current Notion data sources:
 
 - Blog: `bb9e4516-594b-489c-91e5-75de95deafa4`
 - Projects: `53ac54ef-d1dc-47f4-aeb9-c570b40d87de`
+- Awards: `40500125-f31c-4e3f-b3c8-cdd670582dd0`
 
-You can also use `NOTION_BLOG_DATABASE_ID` and `NOTION_PROJECTS_DATABASE_ID`. If database IDs are provided, the app retrieves the first data source inside each database before querying content.
+You can also use `NOTION_BLOG_DATABASE_ID`, `NOTION_PROJECTS_DATABASE_ID`, and `NOTION_AWARDS_DATABASE_ID`. If database IDs are provided, the app retrieves the first data source inside each database before querying content.
 
 4. Share each Notion database with your integration from the database menu under `Add connections`.
 
@@ -58,7 +60,7 @@ npm run dev
 
 ## Notion content model
 
-Create two Notion data sources: one for blog posts and one for projects. The code is flexible about property names, but these fields are recommended.
+Create three Notion data sources: one for blog posts, one for projects, and one for awards. The code is flexible about property names, but these fields are recommended.
 
 ### Blog posts
 
@@ -86,6 +88,22 @@ Create two Notion data sources: one for blog posts and one for projects. The cod
 - `Gallery`: one ImageKit URL or path per line
 - `Video URL`: ImageKit video URL or path
 - `Media Alt Text`: accessible text for the cover image and gallery
+
+### Awards
+
+- `Name`: title property
+- `Event`: rich text
+- `Project`: rich text
+- `Result`: rich text
+- `Summary`: rich text
+- `Year`: number
+- `Sort Order`: number for manual homepage ordering
+- `Tags`: multi-select or comma-separated text
+- `Published`: checkbox
+- `Featured`: checkbox
+- `Cover Image`: ImageKit URL or path
+- `Media Alt Text`: accessible text for the cover image
+- `Reference URL`: optional link to the source page or project reference
 
 Page body blocks are rendered into article HTML for detail pages. Supported blocks include paragraphs, headings, lists, quotes, callouts, code blocks, dividers, images, embeds, bookmarks, and link previews.
 
