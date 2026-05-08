@@ -1,25 +1,47 @@
 # Website Content Guide
 
-Use Notion as the main editing surface. After changing content, click **Push content** in the website sidebar to refresh the cached website data.
+Use the Obsidian GitHub vault as the main editing surface. The website reads published Markdown records from `09 Website Database` in `HoangCuongMax/my-obsidian-vault`, then falls back to Notion if a vault section has no published records.
 
-## Main Notion Databases
+After changing content in Obsidian, commit and push the vault. Obsidian Git is configured to do this automatically.
+
+If the vault repo is private, the website deployment needs `GITHUB_TOKEN` with read-only Contents access to `HoangCuongMax/my-obsidian-vault`.
+
+## Main Obsidian Database Folders
 
 | Content | Database | What it controls |
 | --- | --- | --- |
-| Blog | MaxHoang Blog | Blog index, blog detail pages, latest footer posts |
+| Blog | `09 Website Database/Blog` | Blog index, blog detail pages, latest footer posts |
 | GitHub | Public GitHub profile | Repository showcase page and homepage repo cards |
-| Awards | MaxHoang Awards | Homepage awards carousel |
-| Events | MaxHoang Events | Homepage event slider and latest footer events |
-| Videos | MaxHoang Videos | Homepage About reels carousel |
-| Photos | MaxHoang Photos | Hero slider images and site/sidebar logo |
+| Awards | `09 Website Database/Awards` | Homepage awards carousel |
+| Events | `09 Website Database/Events` | Homepage event slider and latest footer events |
+| Videos | `09 Website Database/Short Videos` | Homepage About reels carousel |
+| Photos | `09 Website Database/Photos` | Hero slider images and site/sidebar logo |
 
 ## Publishing Rules
 
-- Set `Published` to checked when content should appear.
-- Avoid `Status` values like `Draft`, `Hidden`, `Private`, or `Unpublished` for live content.
-- Use `Featured` for homepage priority.
-- Use `Sort Order` when you want manual ordering.
-- Use clear `Media Alt Text` for photos and covers.
+- Set `published: true` when content should appear.
+- Use `published: false` or `status: draft` for private drafts.
+- Use `featured: true` for homepage priority.
+- Use `sortOrder` when you want manual ordering.
+- Use clear `mediaAltText` for photos and covers.
+- Use full public image URLs for website media. Vault file paths work for public vault assets, but private GitHub images cannot be shown directly in a visitor's browser.
+
+## Obsidian Frontmatter
+
+Each website record is a Markdown note with frontmatter:
+
+```yaml
+---
+title: Example
+slug: example
+published: true
+featured: true
+sortOrder: 1
+tags: [AI, Data]
+---
+```
+
+The Markdown body becomes the blog article body for blog records.
 
 ## Photos
 

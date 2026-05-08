@@ -1,20 +1,22 @@
 # Max Hoang Frontend
 
-Custom personal website built with Next.js, Notion-backed writing/media, and a live GitHub repository showcase.
+Custom personal website built with Next.js, Obsidian/GitHub-backed writing/media, Notion fallback support, and a live GitHub repository showcase.
 
 ## What is included
 
 - custom homepage with editorial hero
 - blog index and blog detail pages
 - GitHub repository showcase that updates from public repositories
-- Notion API integration for blog posts, awards, events, short videos, and shared photos
+- Obsidian GitHub vault integration for blog posts, awards, events, short videos, and shared photos
+- Notion API fallback support for existing databases
 - contact page and monthly mailing list popup
 
 ## Stack
 
 - Next.js App Router
 - TypeScript
-- Notion API data sources
+- Obsidian Markdown records stored in GitHub
+- Notion API fallback data sources
 - ImageKit for website media delivery
 
 ## Run locally
@@ -31,7 +33,19 @@ npm install
 cp .env.example .env.local
 ```
 
-3. Add your Notion integration token. The site-specific data source IDs are already committed in `.env`:
+3. Configure the Obsidian vault content source. Defaults already point at `HoangCuongMax/my-obsidian-vault`:
+
+```bash
+OBSIDIAN_VAULT_GITHUB_OWNER=HoangCuongMax
+OBSIDIAN_VAULT_GITHUB_REPO=my-obsidian-vault
+OBSIDIAN_VAULT_GITHUB_BRANCH=main
+OBSIDIAN_VAULT_CONTENT_PATH=09 Website Database
+GITHUB_TOKEN=github_pat_your_read_only_token
+```
+
+`GITHUB_TOKEN` is required when the vault repository is private. Use a fine-grained token with read-only Contents access to `HoangCuongMax/my-obsidian-vault`.
+
+4. Optional: add your Notion integration token if you want Notion fallback content:
 
 ```bash
 NOTION_API_KEY=secret_your_notion_integration_token
@@ -62,17 +76,29 @@ Current Notion data sources:
 
 You can also use `NOTION_BLOG_DATABASE_ID`, `NOTION_AWARDS_DATABASE_ID`, `NOTION_SHORT_VIDEOS_DATABASE_ID`, `NOTION_PHOTOS_DATABASE_ID`, and `NOTION_EVENTS_DATABASE_ID`. If database IDs are provided, the app retrieves the first data source inside each database before querying content.
 
-4. Share each Notion database with your integration from the database menu under `Add connections`.
+5. Share each Notion database with your integration from the database menu under `Add connections` if you still use Notion fallback.
 
-5. Start the frontend:
+6. Start the frontend:
 
 ```bash
 npm run dev
 ```
 
-## Notion content model
+## Obsidian content model
 
-For day-to-day editing, use `CONTENT_GUIDE.md`. The code is flexible about property names, but these fields are recommended.
+The website reads Markdown files from the vault folder `09 Website Database`:
+
+- `Blog`
+- `Awards`
+- `Events`
+- `Photos`
+- `Short Videos`
+
+Set `published: true` in frontmatter to make a record live. Set `published: false` or `status: draft` to hide it.
+
+## Notion fallback content model
+
+For day-to-day editing, use `CONTENT_GUIDE.md`. The code is flexible about frontmatter and Notion property names, but these fields are recommended.
 
 ### Blog posts
 

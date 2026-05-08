@@ -23,6 +23,13 @@ import {
   hasNotionConfig,
   type ContentSource
 } from "@/lib/notion";
+import {
+  fetchVaultAwards,
+  fetchVaultEvents,
+  fetchVaultPosts,
+  fetchVaultShortVideos,
+  fetchVaultSitePhotos
+} from "@/lib/vault";
 
 function normalizeTags(tags: string[] | undefined) {
   return [...new Set((tags ?? []).map((tag) => tag.trim()).filter(Boolean))];
@@ -98,6 +105,12 @@ function postToRelatedItem(post: Post): RelatedContentItem {
 }
 
 export async function getPosts(): Promise<Post[]> {
+  const vaultPosts = await fetchVaultPosts();
+
+  if (vaultPosts.length > 0) {
+    return vaultPosts.map(enhancePost);
+  }
+
   const posts = await fetchNotionPosts();
   const source = withConfiguredFallback(posts, "blog", fallbackPosts);
 
@@ -115,12 +128,24 @@ export async function getFeaturedPosts(): Promise<Post[]> {
 }
 
 export async function getAwards(): Promise<Award[]> {
+  const vaultAwards = await fetchVaultAwards();
+
+  if (vaultAwards.length > 0) {
+    return vaultAwards;
+  }
+
   const awards = await fetchNotionAwards();
 
   return withConfiguredFallback(awards, "awards", fallbackAwards);
 }
 
 export async function getShortVideos(): Promise<ShortVideo[]> {
+  const vaultVideos = await fetchVaultShortVideos();
+
+  if (vaultVideos.length > 0) {
+    return vaultVideos;
+  }
+
   const videos = await fetchNotionShortVideos();
 
   const source = withConfiguredFallback(
@@ -137,6 +162,12 @@ export async function getShortVideos(): Promise<ShortVideo[]> {
 }
 
 export async function getSitePhotos() {
+  const vaultPhotos = await fetchVaultSitePhotos();
+
+  if (vaultPhotos.length > 0) {
+    return vaultPhotos;
+  }
+
   const photos = await fetchNotionSitePhotos();
 
   return withConfiguredFallback(photos, "photos", fallbackSitePhotos);
@@ -177,6 +208,12 @@ export async function getSiteLogo(): Promise<MediaAsset | undefined> {
 }
 
 export async function getEvents(): Promise<EventItem[]> {
+  const vaultEvents = await fetchVaultEvents();
+
+  if (vaultEvents.length > 0) {
+    return vaultEvents;
+  }
+
   const events = await fetchNotionEvents();
 
   return withConfiguredFallback(events, "events", fallbackEvents);
