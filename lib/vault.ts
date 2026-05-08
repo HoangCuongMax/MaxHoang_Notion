@@ -79,12 +79,14 @@ function getRevalidateSeconds() {
 }
 
 function getGithubHeaders(): HeadersInit {
+  const token =
+    process.env.OBSIDIAN_VAULT_GITHUB_TOKEN?.trim() ||
+    process.env.GITHUB_TOKEN?.trim();
+
   return {
     Accept: "application/vnd.github+json",
     "X-GitHub-Api-Version": "2022-11-28",
-    ...(process.env.GITHUB_TOKEN
-      ? { Authorization: `Bearer ${process.env.GITHUB_TOKEN}` }
-      : {})
+    ...(token ? { Authorization: `Bearer ${token}` } : {})
   };
 }
 
@@ -590,6 +592,10 @@ async function fetchVaultFiles(source: VaultSource): Promise<VaultFile[]> {
     );
 
     if (!treeResponse.ok) {
+      console.error(
+        `Obsidian vault fetch failed: ${treeResponse.status} ${treeResponse.statusText}. ` +
+          `Check OBSIDIAN_VAULT_GITHUB_TOKEN can read ${owner}/${repo}.`
+      );
       return [];
     }
 

@@ -38,10 +38,10 @@ OBSIDIAN_VAULT_GITHUB_OWNER=HoangCuongMax
 OBSIDIAN_VAULT_GITHUB_REPO=my-obsidian-vault
 OBSIDIAN_VAULT_GITHUB_BRANCH=main
 OBSIDIAN_VAULT_CONTENT_PATH=09 Website Database
-GITHUB_TOKEN=github_pat_your_read_only_token
+OBSIDIAN_VAULT_GITHUB_TOKEN=github_pat_your_read_only_token
 ```
 
-`GITHUB_TOKEN` is required when the vault repository is private. Use a fine-grained token with read-only Contents access to `HoangCuongMax/my-obsidian-vault`.
+`OBSIDIAN_VAULT_GITHUB_TOKEN` is required when the vault repository is private. Use a fine-grained token with read-only Contents access to `HoangCuongMax/my-obsidian-vault`.
 
 4. Add the remaining site environment values:
 
@@ -179,4 +179,4 @@ stored in local or deployment secrets.
 
 ## Hosting
 
-Deploy the frontend to Vercel or any host that supports Next.js. If the Obsidian vault repository is private, add `GITHUB_TOKEN` as a Vercel environment variable for Production, Preview, and Development.
+Deploy the frontend to Vercel or any host that supports Next.js. If the Obsidian vault repository is private, add `OBSIDIAN_VAULT_GITHUB_TOKEN` as a Vercel environment variable for Production, Preview, and Development.

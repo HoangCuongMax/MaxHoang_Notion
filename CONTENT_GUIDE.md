@@ -4,7 +4,7 @@ Use the Obsidian GitHub vault as the only content database. The website reads pu
 
 After changing content in Obsidian, commit and push the vault. Obsidian Git is configured to do this automatically.
 
-If the vault repo is private, the website deployment needs `GITHUB_TOKEN` with read-only Contents access to `HoangCuongMax/my-obsidian-vault`.
+If the vault repo is private, the website deployment needs `OBSIDIAN_VAULT_GITHUB_TOKEN` with read-only Contents access to `HoangCuongMax/my-obsidian-vault`.
 
 ## Main Obsidian Database Folders
 
