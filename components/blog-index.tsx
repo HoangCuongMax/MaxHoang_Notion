@@ -186,7 +186,7 @@ export async function BlogIndex({
             <div className="notion-row notion-row--static">
               <span className="notion-row__title">No posts in this category</span>
               <span className="notion-row__summary">
-                Try a different category or publish a new post in Notion.
+                Try a different category or publish a new post in Obsidian.
               </span>
             </div>
           ) : null}

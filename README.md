@@ -1,6 +1,6 @@
 # Max Hoang Frontend
 
-Custom personal website built with Next.js, Obsidian/GitHub-backed writing/media, Notion fallback support, and a live GitHub repository showcase.
+Custom personal website built with Next.js, Obsidian/GitHub-backed writing/media, and a live GitHub repository showcase.
 
 ## What is included
 
@@ -8,7 +8,6 @@ Custom personal website built with Next.js, Obsidian/GitHub-backed writing/media
 - blog index and blog detail pages
 - GitHub repository showcase that updates from public repositories
 - Obsidian GitHub vault integration for blog posts, awards, events, short videos, and shared photos
-- Notion API fallback support for existing databases
 - contact page and monthly mailing list popup
 
 ## Stack
@@ -16,7 +15,6 @@ Custom personal website built with Next.js, Obsidian/GitHub-backed writing/media
 - Next.js App Router
 - TypeScript
 - Obsidian Markdown records stored in GitHub
-- Notion API fallback data sources
 - ImageKit for website media delivery
 
 ## Run locally
@@ -45,15 +43,9 @@ GITHUB_TOKEN=github_pat_your_read_only_token
 
 `GITHUB_TOKEN` is required when the vault repository is private. Use a fine-grained token with read-only Contents access to `HoangCuongMax/my-obsidian-vault`.
 
-4. Optional: add your Notion integration token if you want Notion fallback content:
+4. Add the remaining site environment values:
 
 ```bash
-NOTION_API_KEY=secret_your_notion_integration_token
-NOTION_BLOG_DATA_SOURCE_ID=your_blog_data_source_id
-NOTION_AWARDS_DATA_SOURCE_ID=your_awards_data_source_id
-NOTION_SHORT_VIDEOS_DATA_SOURCE_ID=your_short_videos_data_source_id
-NOTION_PHOTOS_DATA_SOURCE_ID=your_photos_data_source_id
-NOTION_EVENTS_DATA_SOURCE_ID=your_events_data_source_id
 GITHUB_USERNAME=HoangCuongMax
 NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT=https://ik.imagekit.io/your_imagekit_id
 CONTACT_TO_EMAIL=hoangngoccuong1414@gmail.com
@@ -66,19 +58,7 @@ SMTP_FROM_NAME=Max Hoang Website
 SMTP_FROM_EMAIL=your_verified_from_email
 ```
 
-Current Notion data sources:
-
-- Blog: `bb9e4516-594b-489c-91e5-75de95deafa4`
-- Awards: `40500125-f31c-4e3f-b3c8-cdd670582dd0`
-- Short videos: `c9ecba7a-e135-4b02-8279-93e4049610f7`
-- Photos: set `NOTION_PHOTOS_DATA_SOURCE_ID` when the database is ready
-- Events: `43444516-1e7a-4289-a8bb-3a589c1acb29`
-
-You can also use `NOTION_BLOG_DATABASE_ID`, `NOTION_AWARDS_DATABASE_ID`, `NOTION_SHORT_VIDEOS_DATABASE_ID`, `NOTION_PHOTOS_DATABASE_ID`, and `NOTION_EVENTS_DATABASE_ID`. If database IDs are provided, the app retrieves the first data source inside each database before querying content.
-
-5. Share each Notion database with your integration from the database menu under `Add connections` if you still use Notion fallback.
-
-6. Start the frontend:
+5. Start the frontend:
 
 ```bash
 npm run dev
@@ -96,9 +76,7 @@ The website reads Markdown files from the vault folder `09 Website Database`:
 
 Set `published: true` in frontmatter to make a record live. Set `published: false` or `status: draft` to hide it.
 
-## Notion fallback content model
-
-For day-to-day editing, use `CONTENT_GUIDE.md`. The code is flexible about frontmatter and Notion property names, but these fields are recommended.
+For day-to-day editing, use `CONTENT_GUIDE.md`. The code is flexible about frontmatter names, but these fields are recommended.
 
 ### Blog posts
 
@@ -159,7 +137,7 @@ For day-to-day editing, use `CONTENT_GUIDE.md`. The code is flexible about front
 ### Photos
 
 - `Name` or `Title`: title property
-- `Photo`, `Photo URL`, `Image`, `Image URL`, `Media`, `File`, `URL`, or `Link`: public image URL or Notion file
+- `Photo`, `Photo URL`, `Image`, `Image URL`, `Media`, `File`, `URL`, or `Link`: public image URL
 - `Display`, `Placement`, `Show On`, or `Use As`: multi-select/tags containing `Hero` or `Logo`
 - `Hero`: optional checkbox to show the photo in the homepage hero slider
 - `Logo`: optional checkbox to use the photo as the site/sidebar logo
@@ -173,17 +151,17 @@ Page body blocks are rendered into article HTML for detail pages. Supported bloc
 
 ## ImageKit media workflow
 
-Use ImageKit as the public media storage layer and Notion as the editor.
+Use ImageKit as the public media storage layer and Obsidian as the editor.
 
 1. Upload photos and videos in the ImageKit media library.
 2. Copy either the full ImageKit URL or the path under your URL endpoint.
-3. Paste the value into `Cover Image`, `Gallery`, or `Video URL` in Notion.
+3. Paste the value into `coverImage`, `gallery`, or `videoUrl` in an Obsidian website database note.
 4. The website renders the media with ImageKit transformations and responsive loading.
 
 If you store relative paths such as `/blog/my-cover.jpg`, set
 `NEXT_PUBLIC_IMAGEKIT_URL_ENDPOINT` in `.env.local` and in your deployment
 environment. Full ImageKit URLs work without the endpoint, but the endpoint keeps
-Notion fields shorter.
+vault fields shorter.
 
 This project is configured for the ImageKit endpoint
 `https://ik.imagekit.io/maxhoang`.
@@ -201,4 +179,4 @@ stored in local or deployment secrets.
 
 ## Hosting
 
-Deploy the frontend to Vercel or any host that supports Next.js. Add `NOTION_API_KEY` as a Vercel environment variable for Production, Preview, and Development. The database IDs are provided by the tracked `.env` file, and the Notion databases must be shared with the integration.
+Deploy the frontend to Vercel or any host that supports Next.js. If the Obsidian vault repository is private, add `GITHUB_TOKEN` as a Vercel environment variable for Production, Preview, and Development.

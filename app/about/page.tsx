@@ -171,10 +171,10 @@ export default async function AboutPage() {
               ))
             ) : (
               <article className="entry-card entry-card--empty">
-                <p className="entry-card__meta">Notion posts</p>
+                <p className="entry-card__meta">Obsidian posts</p>
                 <h3>No posts published yet.</h3>
                 <p>
-                  Add your first published article in Notion and it will appear here.
+                  Add your first published article in Obsidian and it will appear here.
                 </p>
               </article>
             )}

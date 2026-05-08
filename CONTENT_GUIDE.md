@@ -1,6 +1,6 @@
 # Website Content Guide
 
-Use the Obsidian GitHub vault as the main editing surface. The website reads published Markdown records from `09 Website Database` in `HoangCuongMax/my-obsidian-vault`, then falls back to Notion if a vault section has no published records.
+Use the Obsidian GitHub vault as the only content database. The website reads published Markdown records from `09 Website Database` in `HoangCuongMax/my-obsidian-vault`.
 
 After changing content in Obsidian, commit and push the vault. Obsidian Git is configured to do this automatically.
 
@@ -45,42 +45,42 @@ The Markdown body becomes the blog article body for blog records.
 
 ## Photos
 
-For the hero slider, add a row in **MaxHoang Photos**:
+For the hero slider, add a note in `09 Website Database/Photos`:
 
-- `Name`: short label
-- `Photo URL`: public ImageKit or image URL
-- `Hero`: checked
-- `Published`: checked
-- `Sort Order`: display order
+- `title`: short label
+- `imageUrl`: public ImageKit or image URL
+- `display: [Hero]`
+- `published: true`
+- `sortOrder`: display order
 
 For the logo/sidebar image:
 
 - Add or update one row
-- Set `Logo` checked
-- Set `Published` checked
+- Set `display: [Logo]`
+- Set `published: true`
 
 ## Videos
 
-For the About reels slider, add a row in **MaxHoang Videos**:
+For the About reels slider, add a note in `09 Website Database/Short Videos`:
 
-- `Name`: short label
-- `YouTube URL`: YouTube Shorts URL
-- `About Reels`: checked
-- `Published`: checked
-- `Sort Order`: display order
+- `title`: short label
+- `youtubeUrl`: YouTube Shorts URL
+- `display: [About Reels]`
+- `published: true`
+- `sortOrder`: display order
 
 ## Events
 
-For the homepage event slider, add a row in **MaxHoang Events**:
+For the homepage event slider, add a note in `09 Website Database/Events`:
 
-- `Name`: event title
-- `Event Date`: start date
-- `End Date`: optional
-- `Location`: optional
-- `Description`: optional
-- `Cover Photo`: optional image URL used as card background
-- `Event URL`: optional link
-- `Published`: checked
+- `title`: event title
+- `startsAt`: start date
+- `endsAt`: optional
+- `location`: optional
+- `description`: optional
+- `coverImage`: optional image URL used as card background
+- `eventUrl`: optional link
+- `published: true`
 
 Event cards are styled automatically:
 
@@ -93,14 +93,6 @@ Event cards are styled automatically:
 For labels, navigation links, and sidebar/footer text, edit:
 
 `lib/site-config.ts`
-
-For Notion database environment variable names, edit:
-
-`lib/notion.ts`
-
-For fallback content used when Notion is not configured, edit:
-
-`lib/mock-data.ts`
 
 GitHub repositories are pulled automatically from `lib/github.ts`. Add a new
 public repository to GitHub and it will appear on the website after the next

@@ -87,7 +87,7 @@ export function SiteFooter({
 
         <div className="site-footer__bottom">
           <span>Copyright {new Date().getFullYear()} Max Hoang.</span>
-          <span>Built with Notion-backed content.</span>
+          <span>Built with Obsidian-backed content.</span>
         </div>
       </div>
     </footer>

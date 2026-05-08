@@ -401,7 +401,7 @@ function mediaAsset(
   alt: string,
   caption?: string
 ) {
-  const mediaUrl = normalizeMediaUrl(url);
+  const mediaUrl = getImageMediaUrl(url);
 
   if (!mediaUrl) {
     return undefined;
@@ -412,6 +412,14 @@ function mediaAsset(
     alt,
     ...(caption ? { caption } : {})
   };
+}
+
+function getImageMediaUrl(value: string | undefined) {
+  const youtubeId = getYouTubeId(value);
+
+  return youtubeId
+    ? `https://i.ytimg.com/vi/${youtubeId}/hqdefault.jpg`
+    : normalizeMediaUrl(value);
 }
 
 function parseMarkdownInline(value: string) {

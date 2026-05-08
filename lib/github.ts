@@ -57,8 +57,8 @@ const repoShowcaseDetails: Record<
   maxhoang_notion: {
     category: "AI portfolio platform",
     impact:
-      "Connects Notion content, GitHub work, media, events, and writing into one employer-facing portfolio.",
-    skills: ["Next.js", "TypeScript", "Notion API", "GitHub API", "Vercel"],
+      "Connects Obsidian content, GitHub work, media, events, and writing into one employer-facing portfolio.",
+    skills: ["Next.js", "TypeScript", "Obsidian", "GitHub API", "Vercel"],
     signals: ["Portfolio system", "Content automation", "API integration"],
     showcaseRank: 1
   },
@@ -86,7 +86,7 @@ const skillKeywords = [
   { pattern: /ai|ml|machine|vision|nlp|openai|chatbot/i, skill: "AI / ML" },
   { pattern: /data|analytics|dashboard|powerbi|report/i, skill: "Data Analytics" },
   { pattern: /next|react|typescript|frontend|website|web/i, skill: "Web App" },
-  { pattern: /api|automation|workflow|notion|github/i, skill: "Automation" }
+  { pattern: /api|automation|workflow|obsidian|github/i, skill: "Automation" }
 ];
 
 function slugifyRepoName(value: string) {
@@ -128,7 +128,7 @@ function inferCategory(repo: GitHubRepository) {
     return "Data analytics";
   }
 
-  if (/automation|workflow|api|notion|github/i.test(searchText)) {
+  if (/automation|workflow|api|obsidian|github/i.test(searchText)) {
     return "Automation";
   }
 

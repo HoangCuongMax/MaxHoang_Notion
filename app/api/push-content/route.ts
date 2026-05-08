@@ -10,7 +10,7 @@ const pathsToRefresh = [
 ];
 
 export async function POST() {
-  revalidateTag("notion");
+  revalidateTag("obsidian-vault");
 
   for (const path of pathsToRefresh) {
     revalidatePath(path);

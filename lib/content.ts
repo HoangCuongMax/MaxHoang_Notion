@@ -8,22 +8,6 @@ import {
   ShortVideo
 } from "@/lib/types";
 import {
-  fallbackAwards,
-  fallbackEvents,
-  fallbackPosts,
-  fallbackSitePhotos,
-  fallbackShortVideos
-} from "@/lib/mock-data";
-import {
-  fetchNotionAwards,
-  fetchNotionEvents,
-  fetchNotionPosts,
-  fetchNotionSitePhotos,
-  fetchNotionShortVideos,
-  hasNotionConfig,
-  type ContentSource
-} from "@/lib/notion";
-import {
   fetchVaultAwards,
   fetchVaultEvents,
   fetchVaultPosts,
@@ -33,13 +17,6 @@ import {
 
 function normalizeTags(tags: string[] | undefined) {
   return [...new Set((tags ?? []).map((tag) => tag.trim()).filter(Boolean))];
-}
-function withConfiguredFallback<T>(
-  items: T[],
-  source: ContentSource,
-  fallback: T[]
-) {
-  return items.length > 0 || hasNotionConfig(source) ? items : fallback;
 }
 
 function enhancePost(post: Post): Post {
@@ -107,14 +84,7 @@ function postToRelatedItem(post: Post): RelatedContentItem {
 export async function getPosts(): Promise<Post[]> {
   const vaultPosts = await fetchVaultPosts();
 
-  if (vaultPosts.length > 0) {
-    return vaultPosts.map(enhancePost);
-  }
-
-  const posts = await fetchNotionPosts();
-  const source = withConfiguredFallback(posts, "blog", fallbackPosts);
-
-  return source.map(enhancePost);
+  return vaultPosts.map(enhancePost);
 }
 
 export async function getPostBySlug(slug: string): Promise<Post | undefined> {
@@ -128,49 +98,19 @@ export async function getFeaturedPosts(): Promise<Post[]> {
 }
 
 export async function getAwards(): Promise<Award[]> {
-  const vaultAwards = await fetchVaultAwards();
-
-  if (vaultAwards.length > 0) {
-    return vaultAwards;
-  }
-
-  const awards = await fetchNotionAwards();
-
-  return withConfiguredFallback(awards, "awards", fallbackAwards);
+  return fetchVaultAwards();
 }
 
 export async function getShortVideos(): Promise<ShortVideo[]> {
   const vaultVideos = await fetchVaultShortVideos();
 
-  if (vaultVideos.length > 0) {
-    return vaultVideos;
-  }
-
-  const videos = await fetchNotionShortVideos();
-
-  const source = withConfiguredFallback(
-    videos,
-    "shortVideos",
-    fallbackShortVideos
-  );
-
-  const aboutReels = source.filter((video) =>
+  return vaultVideos.filter((video) =>
     video.displayLocations.includes("aboutReels")
   );
-
-  return aboutReels.length > 0 ? aboutReels : fallbackShortVideos;
 }
 
 export async function getSitePhotos() {
-  const vaultPhotos = await fetchVaultSitePhotos();
-
-  if (vaultPhotos.length > 0) {
-    return vaultPhotos;
-  }
-
-  const photos = await fetchNotionSitePhotos();
-
-  return withConfiguredFallback(photos, "photos", fallbackSitePhotos);
+  return fetchVaultSitePhotos();
 }
 
 export async function getHeroSliderImages(): Promise<MediaAsset[]> {
@@ -183,13 +123,7 @@ export async function getHeroSliderImages(): Promise<MediaAsset[]> {
       ...(caption ? { caption } : {})
     }));
 
-  return heroPhotos.length > 0
-    ? heroPhotos
-    : fallbackSitePhotos.map(({ url, alt, caption }) => ({
-        url,
-        alt,
-        ...(caption ? { caption } : {})
-      }));
+  return heroPhotos;
 }
 
 export async function getSiteLogo(): Promise<MediaAsset | undefined> {
@@ -208,15 +142,7 @@ export async function getSiteLogo(): Promise<MediaAsset | undefined> {
 }
 
 export async function getEvents(): Promise<EventItem[]> {
-  const vaultEvents = await fetchVaultEvents();
-
-  if (vaultEvents.length > 0) {
-    return vaultEvents;
-  }
-
-  const events = await fetchNotionEvents();
-
-  return withConfiguredFallback(events, "events", fallbackEvents);
+  return fetchVaultEvents();
 }
 
 export async function getRelatedPosts(
